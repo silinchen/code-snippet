@@ -5,13 +5,14 @@ function fn1() {
 
 function fn2() {
     console.log(2)
+    console.log(this, arguments)
 }
 
 Function.prototype.call = function(context) {
     context = context ? Object(context) : window
     context.fn = this
     let args = []
-    for (let i = 0; i < arguments.length; i++) {
+    for (let i = 1; i < arguments.length; i++) {
         args.push(`arguments[${i}]`)
     }
     let r = eval(`context.fn(${args})`)
