@@ -69,6 +69,15 @@ Once you are satisfied with your changes, run
 Successfully rebased and updated refs/heads/master.
 ```
 
+> 上述修改操作，只是修改某条历史提交的记录中的作者信息。
+> 如果是要修改之后提交的记录中的作者信息，需要使用下面命令修改配置作者信息。
+> 其中 user.name 跟 user.email 参数后面改为自己的名称跟邮箱
+
+```
+git config --global user.name=silinchen
+git config --global user.email=silinccc@gmail.com
+```
+
 #### 删除某条 commit
 ```
 // 修改使用的是下面这个命令
