@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css 实现水平居中</title>
+</head>
+<body>
+  <div class="center">⽔平居中</div>
+  <style>
+    .center {
+      background: red;
+      width: 200px;
+      height: 200px;
+    }
+    /* 1. css margin: 0 auto; */
+    /* .center {
+      margin: 0 auto;
+    } */
+
+    /* 2. flex */
+    /* body {
+      display: flex;
+      justify-content: center;
+    } */
+    
+    /* 3. table 方法 */
+    /* .center {
+      display: table;
+      margin: 0 auto;
+    } */
+
+    /* 4. 绝对定位 margin-left */
+    /* .center {
+      position: absolute;
+      left: 50%;
+      margin-left: -100px;
+    } */
+    /* 5. 绝对定位 transform*/
+    /* 使用 transform 可以按百分比，不必知道元素原来的宽度 */
+    /* .center {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    } */
+    /* 6. 绝对定位 left:0;right:0;margin:0 auto;  */
+    /* .center {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    } */
+  </style>
+</body>
+</html>
