@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css 实现垂直居中</title>
+  <style>
+    .parent {
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+    .son {
+      width: 50px;
+      height: 50px;
+      background: green;
+    }
+    /* 1.  */
+    /* .parent::after, .son{
+      display:inline-block;
+      vertical-align:middle;
+    }
+    .parent::after{
+        content:'';
+        height:100%;
+    } */
+    /* 2. flex */
+    /* .parent {
+      display: flex;
+      align-items: center;
+    } */
+    /* 3. 可用 transform , 设置父元素相对定位(position:relative), 子元素如下css样式 */
+    /* .parent {
+      position: relative;
+    }
+    .son{
+      position:absolute;
+      top:50%;
+      -webkit-transform: translate(0,-50%);  
+      -ms-transform: translate(0,-50%);
+      transform: translate(0,-50%);
+    } */
+
+    /* .parent {
+      position: absolute;
+      top: 50%;
+      margin-top: -100px;
+    } */
+
+    /* .parent {
+      position:absolute;
+      top:0;
+      bottom:0;
+      margin:auto 0;
+    } */
+
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="son"></div>
+  </div>
+</body>
+</html>
