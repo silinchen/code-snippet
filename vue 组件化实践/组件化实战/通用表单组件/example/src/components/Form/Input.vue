@@ -28,7 +28,7 @@ export default {
       this.$emit("input", e.target.value);
 
       // 通知父级执行校验
-      this.$parent.$emit("valid");
+      this.$parent.$emit("validate");
     },
   },
 };

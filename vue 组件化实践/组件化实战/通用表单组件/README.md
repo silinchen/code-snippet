@@ -303,11 +303,109 @@ onInput(e) {
 
 `FormItem` 组件监听校验事件
 
+修改 src/components/Form/FormItem.vue
+
 ```javascript
+props: {
+	...
+    prop: {
+		type: String,
+    },
+},
 mounted() {
-	this.$on()
+    this.$on("validate", () => {
+        this.validate();
+    });
+},
+methods: {
+	validate() {
+        // 当前的规则是什么
+        this.form.rules[this.prop];
+        // 当前的值是什么
+        this.form.model[this.prop];
+	},
+},
+```
+
+> 1. 增加 `prop` 属性（也就是为什么在使用 FromItem 的时候需要传入 prop="xxx"），用来从 `rules` 跟 `model` 中取到对应项的数据
+>2. 绑定监听 validate 事件，这里使用 mounted 而不是 created 是因为这里可以确保挂载完成子组件已存在
+> 3. 实现 validate 方法，这里需要用到 [async-validator](https://github.com/yiminghe/async-validator) 实现异步的校验
+> 4. 安装并添加 [async-validator](https://github.com/yiminghe/async-validator) 依赖：`npm install --save async-validator`
+
+
+
+```javascript
+validate() {
+  // 当前的规则
+  const rules = this.form.rules[this.prop];
+  // 当前的值
+  const value = this.form.model[this.prop];
+  // 校验描述对象，校验规则
+  const descriptor = {
+    [this.prop]: rules,
+  };
+  // 传入规则，创建 AsyncValidaotr 实例
+  const validator = new AsyncValidator(descriptor);
+  // 校验源，要校验的数据
+  const model = {
+    [this.prop]: value,
+  };
+  // 通过 validator 实例校验数据是否符合规则
+  validator.validate(model, (errors) => {
+    // 校验不通过时，返回一个错误信息对象，里面的 message 属性保存了 rules 里面设置的错误信息
+    // 有错误信息将错误信息显示，否则置为空
+    this.validateMessage = errors ? errors[0].message : "";
+  });
 }
 ```
 
-> 这里使用 mounted 而不是 created 是因为这里可以确保挂载完成子组件已存在
+
+
+### 全局校验
+
+例如在登录表单，点击登录按钮的时候，要对所有的表单项进行验证。
+
+使用方法大概如下：
+
+修改：src/App.vue
+
+```
+<Form :model="userInfo" :rules="rules" ref="loginForm">
+	...
+	<FormItem>
+    	<button @click="login">登录</button>
+    </FormItem>
+</From>
+```
+
+表单增加 ref 属性 `ref="loginForm"`，并增加登录按钮
+
+```javascript
+methods: {
+  login() {
+    this.$refs["loginForm"].validate((valid) => {
+      if (valid) {
+        alert("submit");
+      } else {
+        console.log("error submit!");
+        return false;
+      }
+    });
+  },
+},
+```
+
+增加 `login` 方法，通过 `refs` 取得表单并调用表单的 `validate` 方法进行全局校验，`validate` 接收一个回调函数，用来接收验证的结果并根据结果做相应处理。
+
+
+
+修改 src/components/Form/Form.vue，增加 `validate` 方法
+
+```
+
+```
+
+
+
+
 

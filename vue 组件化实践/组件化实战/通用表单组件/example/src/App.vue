@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <Form :model="userInfo">
-      <FormItem label="用户名">
+    <Form :model="userInfo" :rules="rules" ref="loginForm">
+      <FormItem label="用户名" prop="username">
         <Input v-model="userInfo.username" placeholder="请输入用户名" />
       </FormItem>
-      <FormItem label="密码">
+      <FormItem label="密码" prop="password">
         <Input
           type="password"
           v-model="userInfo.password"
           placeholder="请输入密码"
         />
+      </FormItem>
+      <FormItem>
+        <button @click="login">登录</button>
       </FormItem>
     </Form>
   </div>
@@ -34,7 +37,23 @@ export default {
         username: "",
         password: "",
       },
+      rules: {
+        username: [{ required: true, message: "请输入用户名" }],
+        password: [{ required: true, message: "请输入密码" }],
+      },
     };
+  },
+  methods: {
+    login() {
+      this.$refs["loginForm"].validate((valid) => {
+        if (valid) {
+          alert("submit");
+        } else {
+          console.log("error submit!");
+          return false;
+        }
+      });
+    },
   },
 };
 </script>
