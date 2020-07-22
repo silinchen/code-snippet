@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 使用 Canvas 给图片添加水印合成多张图片</title>
+</head>
+
+<body>
+  <!-- <img src="./images/canvas.jpg" alt=""> -->
+  <canvas id="myCanvas" width="700" height="370" ></div>
+  <!-- <button>增加水印</button> -->
+  <script>
+      var img = new Image();
+      // img.crossOrigin = "anonymous";
+
+      // 图片加载完成后在绘制
+      img.addEventListener('load', function() {
+        console.log(123)
+        // 准备canvas环境
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        // canvas.width = 1063;
+        // canvas.height = 638;
+        // 绘制图片
+        ctx.drawImage(img, 0, 0);
+        // 字体及颜色
+        ctx.font = "30px microsoft yahei";
+        ctx.fillStyle = "#FF0000(255,255,255,0.8)";
+        //文字位置
+        ctx.fillText("(我是数字测试)", 120, 170);
+        ctx.fillText("12345678978", 150, 230);
+
+        document.getElementById('myCanvas').appendChild(img)
+      })
+      img.src = "/images/canvas.jpg";
+      // hecheng();
+      // function hecheng() {
+      //   draw(function () {
+      //     document.getElementById('myCanvas').innerHTML = '<img src="' + base64[0] + '">';
+      //   })
+      // }
+      // var base64 = [];
+      // function draw(fn) {
+      //   var imgArr = ["../imgs2/机贴1.jpg", "../imgs2/clipboard.png"];
+      //   var c = document.createElement('canvas'),
+      //     ctx = c.getContext('2d'),
+      //     len = imgArr.length;
+      //   c.width = $(".contentimg").width();
+      //   c.height = $(".contentimg").height();
+      //   console.log(c.width, c.height);
+      //   ctx.rect(0, 0, c.width, c.height);
+      //   ctx.fillStyle = '#ccc';
+      //   ctx.fill();
+      //   function drawing(n) {
+      //     if (n < len) {
+      //       var img = new Image;
+      //       img.src = imgArr[n];
+      //       img.onload = function () {
+      //         if (n == 1) {
+      //           var codeW = $(".imgCode").width(), codeH = $(".imgCode").height();
+      //           ctx.drawImage(img, 94, 125, codeW, codeH);
+      //           drawing(n + 1);
+      //         } else {
+      //           ctx.drawImage(img, 0, 0, c.width, c.height);
+                drawing(n + 1);
+      //         }
+      //       }
+      //     } else {
+      //       base64.push(c.toDataURL("image/jpeg", 0.8));
+      //       fn();
+      //     }
+      //   }
+      //   drawing(0);
+      // }
+  </script>
+</body>
+
+</html>
